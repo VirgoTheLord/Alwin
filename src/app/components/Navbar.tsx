@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen }) => {
   return (
     <div
       ref={menuRef}
-      className={`z-1 w-[40vw] h-[100vh] fixed top-0 right-0 bg-white flex flex-col items-center justify-around transition-transform duration-800 ${
+      className={`z-1 w-[40vw] h-[100vh] fixed top-0 right-0 bg-white flex flex-col items-center justify-around transition-transform duration-800 ease-in-out ${
         isOpen ? "translate-x-0" : "translate-x-full"
       } `}
     >

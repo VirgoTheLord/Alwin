@@ -1,11 +1,10 @@
-"use client";
-
-import { useState } from "react";
+import type { Metadata } from "next";
 import { Playfair_Display, Raleway, Syne } from "next/font/google";
 import localFont from "next/font/local";
-import Header from "@/app/components/Header";
+import ClientLayoutWrapper from "@/app/components/ClientLayoutWrapper";
 import "./globals.css";
 
+// Font Definitions
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-heading",
@@ -45,31 +44,24 @@ const almost = localFont({
   variable: "--font-almost",
 });
 
+export const metadata: Metadata = {
+  title: "Alwin Mathew | Creative Developer",
+  description:
+    "A portfolio showcasing beautiful and functional web experiences.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isOpen, setIsOpen] = useState(false);
+  const fontClassNames = `${playfair.variable} ${raleway.variable} ${syne.variable} ${xtradex.variable} ${almost.variable} ${tanKulture.variable} antialiased`;
 
   return (
     <html lang="en">
-      <body
-        className={`${playfair.variable} ${raleway.variable} ${syne.variable} ${
-          xtradex.variable
-        } ${almost.variable} ${tanKulture.variable} font-souvenir antialiased ${
-          isOpen ? "menu-open" : ""
-        }`}
-      >
-        <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-        <main
-          className={`min-h-screen transition-transform duration-800 ease-in-out ${
-            isOpen ? "-translate-x-[40vw]" : "translate-x-0"
-          }`}
-        >
-          {children}
-        </main>
-      </body>
+      <ClientLayoutWrapper fontClassNames={fontClassNames}>
+        {children}
+      </ClientLayoutWrapper>
     </html>
   );
 }

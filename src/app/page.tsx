@@ -37,6 +37,21 @@ export default function Home() {
         >
           Alwin.
         </h1>
+        <h2 className="text-2xl sm:text-4xl font-almost text-neutral-400 mt-5">
+          Creative Developer.
+        </h2>
+        <p className="text-lg sm:text-xl text-neutral-500 mt-3 max-w-2xl text-center font-syne">
+          I build beautiful and functional web experiences that engage users and
+          elevate brands.
+        </p>
+        <div className="mt-8">
+          <a
+            href="/projects"
+            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-syne"
+          >
+            View Projects
+          </a>
+        </div>
       </section>
       <Footer />
     </main>
