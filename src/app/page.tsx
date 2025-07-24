@@ -3,6 +3,11 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
+import { ReactLenis, useLenis } from "lenis/react";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
 
 const Home = () => {
   const nameRef = useRef<HTMLHeadingElement>(null);
@@ -56,30 +61,30 @@ const Home = () => {
 
       <section
         id="about"
-        className="min-h-screen w-full flex items-center justify-center"
+        className="min-h-screen w-full flex items-center justify-center bg-amber-200"
       >
-        <h2 className="text-6xl font-tankulture">About Me</h2>
+        <About />
       </section>
 
       <section
         id="skills"
-        className="min-h-screen w-full flex items-center justify-center"
+        className="min-h-screen w-full flex items-center justify-center bg-green-200"
       >
-        <h2 className="text-6xl font-tankulture">My Skills</h2>
+        <Skills />
       </section>
 
       <section
         id="projects"
-        className="min-h-screen w-full flex items-center justify-center"
+        className="min-h-screen w-full flex items-center justify-center bg-blue-200"
       >
-        <h2 className="text-6xl font-tankulture">Projects</h2>
+        <Projects />
       </section>
 
       <section
         id="contact"
-        className="min-h-screen w-full flex items-center justify-center"
+        className="min-h-screen w-full flex items-center justify-center bg-red-200"
       >
-        <h2 className="text-6xl font-tankulture">Contact</h2>
+        <Contact />
       </section>
     </>
   );
