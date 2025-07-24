@@ -15,7 +15,6 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, setIsOpen }) => {
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      {/* The href props now point to the section IDs */}
       <NavLink href="#about" label="About" setIsOpen={setIsOpen} />
       <NavLink href="#skills" label="Skills" setIsOpen={setIsOpen} />
       <NavLink href="#projects" label="Projects" setIsOpen={setIsOpen} />

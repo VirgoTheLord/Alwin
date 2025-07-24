@@ -23,7 +23,6 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
           color={color}
         />
       </div>
-      {/* THE FIX: Pass the setIsOpen function down to the Navbar */}
       <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );

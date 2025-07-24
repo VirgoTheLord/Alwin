@@ -17,7 +17,6 @@ export default function ClientLayoutWrapper({
     <body className={`${fontClassNames} ${isOpen ? "menu-open" : ""}`}>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      {/* The main content area is now simpler and will contain all sections */}
       <main
         className={` transition-transform duration-800 ease-in-out ${
           isOpen ? "-translate-x-[40vw]" : "translate-x-0"

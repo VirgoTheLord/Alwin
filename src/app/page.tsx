@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     gsap.registerPlugin(SplitText);
-    let split: SplitText | undefined; // Define split in the outer scope
+    let split: SplitText | undefined;
 
     if (nameRef.current) {
       const ctx = gsap.context(() => {
@@ -30,7 +30,6 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section (Your new, updated version) */}
       <section className="flex flex-col justify-center items-center h-screen px-5">
         <h1
           ref={nameRef}
@@ -47,7 +46,7 @@ const Home = () => {
         </p>
         <div className="mt-8">
           <a
-            href="#projects" // Changed to scroll to the projects section
+            href="#projects"
             className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-syne"
           >
             View Projects
@@ -55,7 +54,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section
         id="about"
         className="min-h-screen w-full flex items-center justify-center"
@@ -63,7 +61,6 @@ const Home = () => {
         <h2 className="text-6xl font-tankulture">About Me</h2>
       </section>
 
-      {/* Skills Section */}
       <section
         id="skills"
         className="min-h-screen w-full flex items-center justify-center"
@@ -71,7 +68,6 @@ const Home = () => {
         <h2 className="text-6xl font-tankulture">My Skills</h2>
       </section>
 
-      {/* Projects Section */}
       <section
         id="projects"
         className="min-h-screen w-full flex items-center justify-center"
@@ -79,7 +75,6 @@ const Home = () => {
         <h2 className="text-6xl font-tankulture">Projects</h2>
       </section>
 
-      {/* Contact Section */}
       <section
         id="contact"
         className="min-h-screen w-full flex items-center justify-center"

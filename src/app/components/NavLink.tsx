@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 
 interface NavLinkProps {
-  href: string; // This will now be an ID like "#about"
+  href: string;
   label: string;
   setIsOpen: (isOpen: boolean) => void;
 }
@@ -37,18 +37,17 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label, setIsOpen }) => {
   const handleMouseLeave = () => timeline.current?.reverse();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault(); // Prevent the default jump-to-anchor behavior
-    setIsOpen(false); // Close the menu
+    e.preventDefault();
+    setIsOpen(false);
 
     const targetElement = document.querySelector(href);
     if (targetElement) {
-      // Wait for the menu to close before scrolling
       setTimeout(() => {
         targetElement.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-      }, 800); // Match this to your menu's transition duration
+      }, 800);
     }
   };
 
