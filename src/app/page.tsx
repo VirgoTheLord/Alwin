@@ -30,14 +30,14 @@ export default function Home() {
   }, []);
   return (
     <main className="flex min-h-screen flex-col">
-      <section className="flex flex-col justify-center sm:justify-start items-center h-screen px-5">
+      <section className="flex flex-col justify-center items-center h-screen px-5">
         <h1
           ref={nameRef}
           className="pl-5 text-[10vh] font-tankulture sm:text-[25vh] "
         >
           Alwin.
         </h1>
-        <h2 className="text-2xl sm:text-4xl font-almost text-neutral-400 mt-5">
+        <h2 className="text-2xl sm:text-4xl font-almost text-neutral-400">
           Creative Developer.
         </h2>
         <p className="text-lg sm:text-xl text-neutral-500 mt-3 max-w-2xl text-center font-syne">
