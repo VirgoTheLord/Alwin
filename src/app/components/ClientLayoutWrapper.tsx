@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function ClientLayoutWrapper({
   children,
@@ -15,12 +16,15 @@ export default function ClientLayoutWrapper({
   return (
     <body className={`${fontClassNames} ${isOpen ? "menu-open" : ""}`}>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+
+      {/* The main content area is now simpler and will contain all sections */}
       <main
-        className={`min-h-screen transition-transform duration-800 ease-in-out ${
+        className={` transition-transform duration-800 ease-in-out ${
           isOpen ? "-translate-x-[40vw]" : "translate-x-0"
         }`}
       >
         {children}
+        <Footer />
       </main>
     </body>
   );

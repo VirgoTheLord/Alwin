@@ -1,35 +1,36 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
-import { useEffect, useRef } from "react";
-import Footer from "./components/Footer";
 
-export default function Home() {
-  const nameRef = useRef(null);
+const Home = () => {
+  const nameRef = useRef<HTMLHeadingElement>(null);
+
   useEffect(() => {
     gsap.registerPlugin(SplitText);
-    let split: SplitText;
+    let split: SplitText | undefined; // Define split in the outer scope
+
     if (nameRef.current) {
-      split = new SplitText(nameRef.current, { type: "lines,chars" });
+      const ctx = gsap.context(() => {
+        split = new SplitText(nameRef.current, { type: "lines,chars" });
 
-      gsap.set(split.lines, { overflow: "hidden" });
-      gsap.from(split.chars, {
-        yPercent: 100,
-        ease: "power4.out",
-        duration: 1.5,
-        stagger: 0.05,
-      });
+        gsap.set(split.lines, { overflow: "hidden" });
+        gsap.from(split.chars, {
+          yPercent: 100,
+          ease: "power4.out",
+          duration: 1.5,
+          stagger: 0.05,
+        });
+      }, nameRef);
+
+      return () => ctx.revert();
     }
-
-    return () => {
-      if (split) {
-        split.revert();
-      }
-    };
   }, []);
+
   return (
-    <main className="flex min-h-screen flex-col">
+    <>
+      {/* Hero Section (Your new, updated version) */}
       <section className="flex flex-col justify-center items-center h-screen px-5">
         <h1
           ref={nameRef}
@@ -46,14 +47,47 @@ export default function Home() {
         </p>
         <div className="mt-8">
           <a
-            href="/projects"
+            href="#projects" // Changed to scroll to the projects section
             className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-syne"
           >
             View Projects
           </a>
         </div>
       </section>
-      <Footer />
-    </main>
+
+      {/* About Section */}
+      <section
+        id="about"
+        className="min-h-screen w-full flex items-center justify-center"
+      >
+        <h2 className="text-6xl font-tankulture">About Me</h2>
+      </section>
+
+      {/* Skills Section */}
+      <section
+        id="skills"
+        className="min-h-screen w-full flex items-center justify-center"
+      >
+        <h2 className="text-6xl font-tankulture">My Skills</h2>
+      </section>
+
+      {/* Projects Section */}
+      <section
+        id="projects"
+        className="min-h-screen w-full flex items-center justify-center"
+      >
+        <h2 className="text-6xl font-tankulture">Projects</h2>
+      </section>
+
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="min-h-screen w-full flex items-center justify-center"
+      >
+        <h2 className="text-6xl font-tankulture">Contact</h2>
+      </section>
+    </>
   );
-}
+};
+
+export default Home;

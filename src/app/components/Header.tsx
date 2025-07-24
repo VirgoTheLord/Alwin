@@ -3,7 +3,6 @@
 import React from "react";
 import Navbar from "./Navbar";
 import { Twirl as Hamburger } from "hamburger-react";
-
 import { Dispatch, SetStateAction } from "react";
 
 interface HeaderProps {
@@ -24,7 +23,8 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
           color={color}
         />
       </div>
-      <Navbar isOpen={isOpen} />
+      {/* THE FIX: Pass the setIsOpen function down to the Navbar */}
+      <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
