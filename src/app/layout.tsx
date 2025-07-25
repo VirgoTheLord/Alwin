@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Raleway, Syne } from "next/font/google";
 import localFont from "next/font/local";
-import ClientLayoutWrapper from "@/app/components/ClientLayoutWrapper";
+import ClientLayoutWrapper from "../components/ClientLayoutWrapper";
 import "./globals.css";
 
-// Font Definitions
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-heading",

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 
-const About = () => {
+const Projects = () => {
   const nameRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -31,11 +31,11 @@ const About = () => {
   }, []);
   return (
     <div>
-      <h1 ref={nameRef} className="text-7xl text-black font-almost">
-        About Me
+      <h1 ref={nameRef} className="text-7xl text-white font-almost">
+        Projects
       </h1>
     </div>
   );
 };
 
-export default About;
+export default Projects;

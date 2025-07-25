@@ -2,91 +2,113 @@
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { SplitText } from "gsap/all";
-import { ReactLenis, useLenis } from "lenis/react";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
+import { ScrollTrigger, SplitText } from "gsap/all";
+import { useLenis } from "lenis/react";
+import ParallaxSection from "../components/ParallaxSection"; // Adjust path as needed
+import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Contact from "@/components/Contact";
+import Projects from "@/components/Projects";
+
+// Register GSAP plugins globally
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Home = () => {
-  const nameRef = useRef<HTMLHeadingElement>(null);
+  const mainContainerRef = useRef(null);
+  const lenis = useLenis();
 
+  // Sync Lenis and GSAP
   useEffect(() => {
-    gsap.registerPlugin(SplitText);
-    let split: SplitText | undefined;
-
-    if (nameRef.current) {
-      const ctx = gsap.context(() => {
-        split = new SplitText(nameRef.current, { type: "lines,chars" });
-
-        gsap.set(split.lines, { overflow: "hidden" });
-        gsap.from(split.chars, {
-          yPercent: 100,
-          ease: "power4.out",
-          duration: 1.5,
-          stagger: 0.05,
-        });
-      }, nameRef);
-
-      return () => ctx.revert();
+    if (lenis) {
+      lenis.on("scroll", ScrollTrigger.update);
+      const unsubscribe = gsap.ticker.add((time: number) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+      return () => {
+        unsubscribe();
+        lenis.off("scroll", ScrollTrigger.update);
+      };
     }
+  }, [lenis]);
+
+  // GSAP Animations for Hero Section
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const split = new SplitText(".hero-title", {
+        type: "chars",
+        charsClass: "char",
+      });
+
+      const tl = gsap.timeline({ delay: 0.2 });
+      tl.from(split.chars, {
+        yPercent: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        stagger: 0.05,
+      }).from(
+        ".hero-subtitle, .hero-button",
+        {
+          y: 30,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          stagger: 0.2,
+        },
+        "-=1.2"
+      );
+    }, mainContainerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <>
-      <section className="flex flex-col justify-center items-center h-screen px-5">
-        <h1
-          ref={nameRef}
-          className="pl-5 text-[10vh] font-tankulture sm:text-[25vh] "
-        >
+    <main ref={mainContainerRef} className="bg-black">
+      <section className="flex flex-col justify-center items-center h-screen px-5 text-white bg-black">
+        <h1 className="hero-title pl-5 text-[10vh] font-tankulture sm:text-[25vh]">
           Alwin.
         </h1>
-        <h2 className="text-2xl sm:text-4xl font-almost text-neutral-400">
+        <h2 className="hero-subtitle text-2xl sm:text-4xl font-almost text-neutral-300">
           Creative Developer.
         </h2>
-        <p className="text-lg sm:text-xl text-neutral-500 mt-3 max-w-2xl text-center font-syne">
+        <p className="hero-button text-lg sm:text-xl text-neutral-400 mt-3 max-w-2xl text-center font-syne">
           I build beautiful and functional web experiences that engage users and
           elevate brands.
         </p>
-        <div className="mt-8">
-          <a
-            href="#projects"
-            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-syne"
-          >
-            View Projects
-          </a>
-        </div>
       </section>
 
-      <section
-        id="about"
-        className="min-h-screen w-full flex items-center justify-center bg-amber-200"
+      <ParallaxSection
+        imgSrc="13.png"
+        imgAlt="Mountain landscape"
+        imgSpeed={0.15}
       >
         <About />
-      </section>
+      </ParallaxSection>
 
-      <section
-        id="skills"
-        className="min-h-screen w-full flex items-center justify-center bg-green-200"
+      <ParallaxSection
+        imgSrc="3.png"
+        imgAlt="Abstract architecture"
+        imgSpeed={0.25}
       >
         <Skills />
-      </section>
-
-      <section
-        id="projects"
-        className="min-h-screen w-full flex items-center justify-center bg-blue-200"
+      </ParallaxSection>
+      <ParallaxSection
+        imgSrc="13.png"
+        imgAlt="River through a valley"
+        imgSpeed={0.1}
       >
         <Projects />
-      </section>
+      </ParallaxSection>
 
-      <section
-        id="contact"
-        className="min-h-screen w-full flex items-center justify-center bg-red-200"
+      <ParallaxSection
+        imgSrc="3.png"
+        imgAlt="River through a valley"
+        imgSpeed={0.1}
       >
         <Contact />
-      </section>
-    </>
+      </ParallaxSection>
+    </main>
   );
 };
 
