@@ -99,7 +99,7 @@ const Projects = () => {
       `}</style>
       <div
         ref={containerRef}
-        className="w-full min-h-screen flex flex-col items-start justify-center py-40  overflow-hidden"
+        className="w-full min-h-screen flex flex-col items-start justify-center py-25 overflow-hidden"
       >
         <div className="px-4 md:px-20 text-left w-full flex justify-between items-center">
           <h1 ref={nameRef} className="text-7xl text-white font-almost mb-24">

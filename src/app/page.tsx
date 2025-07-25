@@ -79,6 +79,7 @@ const Home = () => {
       </section>
 
       <ParallaxSection
+        id="about"
         imgSrc="13.png"
         imgAlt="Mountain landscape"
         imgSpeed={0.15}
@@ -87,6 +88,7 @@ const Home = () => {
       </ParallaxSection>
 
       <ParallaxSection
+        id="skills"
         imgSrc="3.png"
         imgAlt="Abstract architecture"
         imgSpeed={0.25}
@@ -94,6 +96,7 @@ const Home = () => {
         <Skills />
       </ParallaxSection>
       <ParallaxSection
+        id="projects"
         imgSrc="13.png"
         imgAlt="River through a valley"
         imgSpeed={0.1}
@@ -102,6 +105,7 @@ const Home = () => {
       </ParallaxSection>
 
       <ParallaxSection
+        id="contact"
         imgSrc="3.png"
         imgAlt="River through a valley"
         imgSpeed={0.1}

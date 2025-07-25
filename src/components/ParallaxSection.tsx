@@ -7,10 +7,12 @@ interface ParallaxSectionProps {
   imgAlt: string;
   imgSpeed?: number;
   className?: string;
+  id?: string;
 }
 
 const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   children,
+  id,
   imgSrc,
   imgAlt,
   imgSpeed,
@@ -19,6 +21,7 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   return (
     // The section now acts as a simple container with a parallax background
     <section
+      id={id}
       className={`relative w-full min-h-screen overflow-hidden ${className}`}
     >
       <ParallaxImage src={imgSrc} alt={imgAlt} speed={imgSpeed} />
