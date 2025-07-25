@@ -60,7 +60,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label, setIsOpen }) => {
     >
       <div
         ref={coloredBgRef}
-        className="absolute top-0 left-0 w-full h-full bg-green-400 origin-left z-0"
+        className="absolute top-0 left-0 w-full h-full bg-black origin-left z-0"
         style={{ transform: "scaleX(0)" }}
       />
       <a
