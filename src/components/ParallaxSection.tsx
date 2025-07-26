@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import ParallaxImage from "./ParallaxImage"; // Assuming it's in the same folder
+import ParallaxImage from "./ParallaxImage";
 
 interface ParallaxSectionProps {
   children: ReactNode;
@@ -19,13 +19,11 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   className = "",
 }) => {
   return (
-    // The section now acts as a simple container with a parallax background
     <section
       id={id}
       className={`relative w-full min-h-screen overflow-hidden ${className}`}
     >
       <ParallaxImage src={imgSrc} alt={imgAlt} speed={imgSpeed} />
-      {/* The content inside is no longer forced to be centered */}
       <div className="relative z-10 w-full h-full">{children}</div>
     </section>
   );
