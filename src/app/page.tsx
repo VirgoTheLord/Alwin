@@ -38,23 +38,32 @@ const Home = () => {
       });
 
       const tl = gsap.timeline({ delay: 0.2 });
-      tl.from(split.chars, {
-        yPercent: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power4.out",
-        stagger: 0.05,
-      }).from(
-        ".hero-subtitle, .hero-button",
-        {
-          y: 30,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out",
-          stagger: 0.2,
-        },
-        "-=1.2"
-      );
+
+      // This tween makes the main <h1> container visible instantly,
+      // allowing the character animation to play inside it.
+      tl.from(".hero-title", { autoAlpha: 0, duration: 0.01 })
+        .from(
+          split.chars,
+          {
+            yPercent: 100,
+            opacity: 0, // Opacity is sufficient here now
+            duration: 1.5,
+            ease: "power4.out",
+            stagger: 0.05,
+          },
+          "<"
+        ) // Start at the same time as the parent container becomes visible
+        .from(
+          ".hero-subtitle, .hero-button",
+          {
+            y: 30,
+            autoAlpha: 0, // This correctly handles the other elements
+            duration: 1.2,
+            ease: "power3.out",
+            stagger: 0.2,
+          },
+          "-=1.2"
+        );
     }, mainContainerRef);
 
     return () => ctx.revert();
@@ -64,13 +73,13 @@ const Home = () => {
     <main ref={mainContainerRef}>
       <section className="relative flex flex-col justify-center items-center h-screen px-5 text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black -z-1"></div>
-        <h1 className="hero-title pl-5 text-[10vh] font-tankulture sm:text-[25vh]">
+        <h1 className="hero-title pl-5 text-[10vh] font-tankulture sm:text-[25vh] invisible">
           Alwin.
         </h1>
-        <h2 className="hero-subtitle text-2xl sm:text-4xl font-almost text-neutral-300">
+        <h2 className="hero-subtitle text-2xl sm:text-4xl font-almost text-neutral-300 invisible">
           Software Developer.
         </h2>
-        <p className="hero-button text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne">
+        <p className="hero-button text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne invisible">
           Crafting immersive digital experiences with a blend of creativity and
           technology.
         </p>

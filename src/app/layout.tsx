@@ -58,9 +58,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <ClientLayoutWrapper fontClassNames={fontClassNames}>
-        {children}
-      </ClientLayoutWrapper>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+      </head>
+      <body>
+        <ClientLayoutWrapper fontClassNames={fontClassNames}>
+          {children}
+        </ClientLayoutWrapper>
+      </body>
     </html>
   );
 }
