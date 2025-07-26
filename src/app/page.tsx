@@ -4,20 +4,18 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { useLenis } from "lenis/react";
-import ParallaxSection from "../components/ParallaxSection"; // Adjust path as needed
+import ParallaxSection from "../components/ParallaxSection";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Projects from "@/components/Projects";
 
-// Register GSAP plugins globally
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Home = () => {
   const mainContainerRef = useRef(null);
   const lenis = useLenis();
 
-  // Sync Lenis and GSAP
   useEffect(() => {
     if (lenis) {
       lenis.on("scroll", ScrollTrigger.update);
@@ -32,7 +30,6 @@ const Home = () => {
     }
   }, [lenis]);
 
-  // GSAP Animations for Hero Section
   useEffect(() => {
     const ctx = gsap.context(() => {
       const split = new SplitText(".hero-title", {
@@ -64,8 +61,9 @@ const Home = () => {
   }, []);
 
   return (
-    <main ref={mainContainerRef} className="bg-black">
-      <section className="flex flex-col justify-center items-center h-screen px-5 text-white bg-black">
+    <main ref={mainContainerRef}>
+      <section className="relative flex flex-col justify-center items-center h-screen px-5 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black -z-1"></div>
         <h1 className="hero-title pl-5 text-[10vh] font-tankulture sm:text-[25vh]">
           Alwin.
         </h1>
@@ -73,9 +71,8 @@ const Home = () => {
           Creative Developer.
         </h2>
         <p className="hero-button text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne">
-          I craft seamless digital journeys. By integrating polished front-end
-          design with powerful back-end functionality, I build beautiful web
-          experiences that convert users and elevate brands.
+          Crafting immersive digital experiences with a blend of creativity and
+          technology.
         </p>
       </section>
 
@@ -96,6 +93,7 @@ const Home = () => {
       >
         <Skills />
       </ParallaxSection>
+
       <ParallaxSection
         id="projects"
         imgSrc="cloud.jpg"
@@ -105,14 +103,17 @@ const Home = () => {
         <Projects />
       </ParallaxSection>
 
-      <ParallaxSection
+      {/* <ParallaxSection
         id="contact"
         imgSrc="3.png"
         imgAlt="River through a valley"
         imgSpeed={0.1}
       >
         <Contact />
-      </ParallaxSection>
+      </ParallaxSection> */}
+      <section id="contact">
+        <Contact />
+      </section>
     </main>
   );
 };

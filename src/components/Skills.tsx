@@ -63,8 +63,9 @@ const Skills = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full flex flex-col items-center justify-start pt-16 md:pt-20 bg-black"
+      className="w-full flex flex-col items-center justify-start pt-16 md:pt-20"
     >
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black -z-1"></div>
       <div className="px-4 md:px-20 text-center">
         <h1
           ref={nameRef}
