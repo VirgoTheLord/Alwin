@@ -33,3 +33,7 @@ body {
 body.menu-open {
   overflow-x: hidden;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}

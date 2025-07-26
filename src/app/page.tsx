@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { useLenis } from "lenis/react";
@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Home = () => {
   const mainContainerRef = useRef(null);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -30,7 +31,35 @@ const Home = () => {
     }
   }, [lenis]);
 
+  // Font loading effect
   useEffect(() => {
+    const loadFonts = async () => {
+      try {
+        // Wait for document fonts to be ready
+        if (document.fonts && document.fonts.ready) {
+          await document.fonts.ready;
+        }
+
+        // Additional check - wait for a frame to ensure fonts are applied
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+
+        // Small delay to ensure fonts are fully rendered
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
+        setFontsLoaded(true);
+      } catch (error) {
+        // Fallback - set fonts as loaded after a timeout
+        setTimeout(() => setFontsLoaded(true), 200);
+      }
+    };
+
+    loadFonts();
+  }, []);
+
+  // Animation effect - only runs when fonts are loaded
+  useEffect(() => {
+    if (!fontsLoaded) return;
+
     const ctx = gsap.context(() => {
       const split = new SplitText(".hero-title", {
         type: "chars",
@@ -46,18 +75,18 @@ const Home = () => {
           split.chars,
           {
             yPercent: 100,
-            opacity: 0, // Opacity is sufficient here now
+            opacity: 0,
             duration: 1.5,
             ease: "power4.out",
             stagger: 0.05,
           },
           "<"
-        ) // Start at the same time as the parent container becomes visible
+        )
         .from(
           ".hero-subtitle, .hero-button",
           {
             y: 30,
-            autoAlpha: 0, // This correctly handles the other elements
+            autoAlpha: 0,
             duration: 1.2,
             ease: "power3.out",
             stagger: 0.2,
@@ -67,7 +96,7 @@ const Home = () => {
     }, mainContainerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [fontsLoaded]);
 
   return (
     <main ref={mainContainerRef}>
