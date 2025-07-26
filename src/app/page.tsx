@@ -31,24 +31,19 @@ const Home = () => {
     }
   }, [lenis]);
 
-  // Font loading effect
   useEffect(() => {
     const loadFonts = async () => {
       try {
-        // Wait for document fonts to be ready
         if (document.fonts && document.fonts.ready) {
           await document.fonts.ready;
         }
 
-        // Additional check - wait for a frame to ensure fonts are applied
         await new Promise((resolve) => requestAnimationFrame(resolve));
 
-        // Small delay to ensure fonts are fully rendered
         await new Promise((resolve) => setTimeout(resolve, 50));
 
         setFontsLoaded(true);
       } catch (error) {
-        // Fallback - set fonts as loaded after a timeout
         setTimeout(() => setFontsLoaded(true), 200);
       }
     };
@@ -56,7 +51,6 @@ const Home = () => {
     loadFonts();
   }, []);
 
-  // Animation effect - only runs when fonts are loaded
   useEffect(() => {
     if (!fontsLoaded) return;
 
@@ -68,8 +62,6 @@ const Home = () => {
 
       const tl = gsap.timeline({ delay: 0.2 });
 
-      // This tween makes the main <h1> container visible instantly,
-      // allowing the character animation to play inside it.
       tl.from(".hero-title", { autoAlpha: 0, duration: 0.01 })
         .from(
           split.chars,

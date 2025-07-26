@@ -30,6 +30,20 @@ const About = () => {
         });
       }
 
+      // Animate the "Yup." text in after the title
+      gsap.from(".about-aside", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        x: 20,
+        opacity: 0,
+        ease: "power4.out",
+        duration: 1,
+        delay: 0.8, // Delay to have it appear after the main title
+      });
+
       const lines = gsap.utils.toArray(".fill-line-container");
       gsap.to(lines, {
         clipPath: "inset(0% 0% 0% 0%)",
@@ -58,11 +72,11 @@ const About = () => {
   return (
     <div ref={containerRef} className="flex w-full min-h-screen">
       <div className="w-full flex flex-col justify-center items-start text-left px-6 sm:px-10 md:px-20 py-24 md:py-30">
-        <div className="flex">
-          <h1 ref={nameRef} className="text-4xl text-white font-almost mb-12">
+        <div className="flex items-baseline gap-4 mb-12">
+          <h1 ref={nameRef} className="text-4xl text-white font-almost">
             About Me
           </h1>
-          <h2 className="font-raleway text-md font-bold mt-4 pl-3 uppercase">
+          <h2 className="about-aside font-raleway text-md font-bold uppercase text-neutral-500">
             Yup.
           </h2>
         </div>
@@ -70,7 +84,7 @@ const About = () => {
         <div className="flex flex-col w-full">
           {aboutTextLines.map((line, index) => (
             <div key={index} className="relative mb-2 md:mb-4">
-              <p className="text-5xl sm:text-8xl md:text-7xl text-neutral-500 leading-tight font-xtradex font-medium">
+              <p className="text-5xl sm:text-6xl md:text-7xl text-neutral-500 leading-tight font-xtradex font-medium">
                 {line}
               </p>
 
@@ -78,7 +92,7 @@ const About = () => {
                 className="fill-line-container absolute top-0 left-0 w-full h-full"
                 style={{ clipPath: "inset(0% 100% 0% 0%)" }}
               >
-                <p className="text-5xl sm:text-8xl md:text-7xl text-white leading-tight font-xtradex font-medium">
+                <p className="text-5xl sm:text-6xl md:text-7xl text-white leading-tight font-xtradex font-medium">
                   {line}
                 </p>
               </div>
