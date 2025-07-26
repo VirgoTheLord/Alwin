@@ -72,15 +72,16 @@ const Home = () => {
         <h2 className="hero-subtitle text-2xl sm:text-4xl font-almost text-neutral-300">
           Creative Developer.
         </h2>
-        <p className="hero-button text-lg sm:text-xl text-neutral-400 mt-3 max-w-2xl text-center font-syne">
-          I build beautiful and functional web experiences that engage users and
-          elevate brands.
+        <p className="hero-button text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne">
+          I craft seamless digital journeys. By integrating polished front-end
+          design with powerful back-end functionality, I build beautiful web
+          experiences that convert users and elevate brands.
         </p>
       </section>
 
       <ParallaxSection
         id="about"
-        imgSrc="13.png"
+        imgSrc="cloud.jpg"
         imgAlt="Mountain landscape"
         imgSpeed={0.15}
       >
@@ -97,7 +98,7 @@ const Home = () => {
       </ParallaxSection>
       <ParallaxSection
         id="projects"
-        imgSrc="13.png"
+        imgSrc="cloud.jpg"
         imgAlt="River through a valley"
         imgSpeed={0.1}
       >

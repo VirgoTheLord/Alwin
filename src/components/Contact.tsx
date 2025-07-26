@@ -66,7 +66,7 @@ const Contact = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full min-h-screen flex flex-col items-center justify-center text-center py-40 "
+      className="w-full min-h-screen flex flex-col items-center justify-center text-center py-40 bg-black"
     >
       <div className="px-4 md:px-20">
         <h1 ref={nameRef} className="text-7xl text-white font-almost mb-8">
@@ -86,27 +86,6 @@ const Contact = () => {
       >
         {emailCopied ? "Copied!" : "hello@example.com"}
       </a>
-
-      <div className="contact-element flex gap-8 mt-24">
-        <a
-          href="#"
-          className="text-neutral-500 hover:text-white transition-colors"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="#"
-          className="text-neutral-500 hover:text-white transition-colors"
-        >
-          Twitter
-        </a>
-        <a
-          href="#"
-          className="text-neutral-500 hover:text-white transition-colors"
-        >
-          GitHub
-        </a>
-      </div>
     </div>
   );
 };

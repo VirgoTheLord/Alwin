@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
-import Image from "next/image";
 
-// Register the necessary GSAP plugins
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Skills = () => {
@@ -14,19 +12,18 @@ const Skills = () => {
   const listContainerRef = useRef<HTMLDivElement>(null);
 
   const skillItems = [
-    { name: "React", image: "/13.png" },
-    { name: "TypeScript", image: "/3.png" },
-    { name: "Next.js", image: "/13.png" },
-    { name: "GSAP", image: "/3.png" },
-    { name: "Three.js", image: "/13.png" },
-    { name: "Framer Motion", image: "/3.png" },
-    { name: "JavaScript", image: "/13.png" },
-    { name: "Tailwind CSS", image: "/3.png" },
+    { name: "React" },
+    { name: "TypeScript" },
+    { name: "Next.js" },
+    { name: "GSAP" },
+    { name: "MERN" },
+    { name: "WebSockets" },
+    { name: "JavaScript" },
+    { name: "Tailwind CSS" },
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. "My Skills" heading animation
       if (nameRef.current) {
         const split = new SplitText(nameRef.current, { type: "lines,chars" });
         gsap.from(split.chars, {
@@ -43,14 +40,12 @@ const Skills = () => {
         });
       }
 
-      // 2. Animate each skill row into view on scroll
       const skillRows = gsap.utils.toArray(".skill-item");
       if (skillRows.length > 0) {
         gsap.from(skillRows, {
           scrollTrigger: {
             trigger: listContainerRef.current,
             start: "top 80%",
-            // UPDATED: Removed reversible scroll logic
             toggleActions: "play none none none",
           },
           y: 50,
@@ -68,32 +63,32 @@ const Skills = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full flex flex-col items-center justify-start pt-20 bg-black"
+      className="w-full flex flex-col items-center justify-start pt-16 md:pt-20 bg-black"
     >
       <div className="px-4 md:px-20 text-center">
-        <h1 ref={nameRef} className="text-7xl text-white font-almost mb-24">
+        <h1
+          ref={nameRef}
+          className="text-5xl md:text-7xl text-white font-almost mb-16 md:mb-24"
+        >
           My Skills
         </h1>
       </div>
 
-      {/* Main layout container for the list, now full-width */}
       <div ref={listContainerRef} className="w-full">
-        <div className="flex flex-col border-t border-zinc-800 bg-white">
+        <div className="flex flex-col border-t border-zinc-800 bg-neutral-100">
           {skillItems.map((skill, index) => (
             <div
               key={index}
-              className="skill-item group relative w-full flex justify-between items-center py-8 border-b border-zinc-800 px-4 md:px-20 overflow-hidden"
+              className="skill-item group relative w-full flex justify-between items-center py-6 md:py-8 border-b border-zinc-800 px-4 md:px-20 overflow-hidden"
             >
-              {/* Vertical split fill layers for hover effect */}
               <div className="absolute top-0 left-0 w-full h-1/2 bg-black transform scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100"></div>
               <div className="absolute bottom-0 left-0 w-full h-1/2 bg-black transform scale-y-0 origin-top transition-transform duration-500 ease-in-out group-hover:scale-y-100"></div>
 
-              {/* Content layer */}
               <div className="relative z-10 flex justify-between items-center w-full">
-                <span className="text-5xl text-neutral-500 font-raleway font-bold transition-colors duration-300 ease-in-out group-hover:text-white">
+                <span className="text-4xl sm:text-5xl text-neutral-500 font-raleway font-bold transition-colors duration-300 ease-in-out group-hover:text-white">
                   {skill.name}
                 </span>
-                <span className="text-xl text-neutral-600 font-syne transition-colors duration-300 ease-in-out group-hover:text-neutral-400">
+                <span className="text-lg md:text-xl text-neutral-600 font-syne transition-colors duration-300 ease-in-out group-hover:text-neutral-400">
                   Expert
                 </span>
               </div>
