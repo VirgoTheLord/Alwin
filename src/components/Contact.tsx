@@ -185,11 +185,11 @@ const Contact = () => {
           ref={nameRef}
           className="text-5xl sm:text-6xl md:text-7xl text-white font-almost mb-6"
         >
-          Let's Connect
+          Let&apos;s Connect
         </h1>
         <p className="contact-element text-lg md:text-xl text-neutral-400 font-syne max-w-2xl mx-auto mb-16">
           Have a project in mind or just want to say hello? Feel free to reach
-          out. I'm always open to discussing new ideas and opportunities.
+          out. I&apos;m always open to discussing new ideas and opportunities.
         </p>
       </div>
 
@@ -224,10 +224,10 @@ const Contact = () => {
       </div>
 
       <div className="contact-element flex gap-8 relative z-10">
-        <MagneticIcon href="https://github.com">
+        <MagneticIcon href="https://github.com/VirgoTheLord">
           <FaGithub size={28} />
         </MagneticIcon>
-        <MagneticIcon href="https://linkedin.com">
+        <MagneticIcon href="https://www.linkedin.com/in/alwin-aby-mathew/">
           <FaLinkedin size={28} />
         </MagneticIcon>
         <MagneticIcon href="https://twitter.com">

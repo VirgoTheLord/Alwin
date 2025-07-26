@@ -56,7 +56,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label, setIsOpen }) => {
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative border-2 border-black w-full h-1/4 flex items-center justify-center md:justify-start font-almost md:text-6xl text-2xl cursor-pointer"
+      className="relative border-b-3 border-l-1 border-black w-full h-1/4 flex items-center justify-center md:justify-start font-almost md:text-6xl text-2xl cursor-pointer"
     >
       <div
         ref={coloredBgRef}

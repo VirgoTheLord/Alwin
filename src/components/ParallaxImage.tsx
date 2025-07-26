@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 
 const lerp = (start: number, end: number, factor: number) =>
   start + (end - start) * factor;
@@ -70,11 +71,12 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
 
   return (
     <div ref={wrapperRef} className="absolute inset-0 overflow-hidden">
-      <img
+      <Image
         ref={imageRef}
         src={src}
         alt={alt}
-        className="absolute top-0 left-0 w-full h-full object-cover will-change-transform"
+        fill
+        className="object-cover will-change-transform"
         style={{ transform: "translateY(0) scale(1.2)" }}
       />
     </div>

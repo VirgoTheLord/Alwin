@@ -40,7 +40,7 @@ const Footer = () => {
       </span>
       <span className="mx-4 text-2xl text-neutral-700">&bull;</span>
       <span className="text-2xl font-almost text-neutral-600">
-        Creative Developer
+        Software Developer
       </span>
     </div>
   );
@@ -70,7 +70,6 @@ const Footer = () => {
         aria-hidden="true"
       >
         <div className="animate-scroll flex">
-          {/* Render the content twice for a seamless loop */}
           <MarqueeContent />
           <MarqueeContent />
           <MarqueeContent />
@@ -85,7 +84,7 @@ const Footer = () => {
         </p>
         <div className="flex gap-6">
           <a
-            href="https://github.com"
+            href="https://github.com/VirgoTheLord"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
@@ -94,7 +93,7 @@ const Footer = () => {
             <SiGithub size={20} />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/alwin-aby-mathew/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"

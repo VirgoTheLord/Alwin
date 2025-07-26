@@ -78,7 +78,7 @@ const Home = () => {
 
       <ParallaxSection
         id="about"
-        imgSrc="cloud.jpg"
+        imgSrc="/cloud.jpg"
         imgAlt="Mountain landscape"
         imgSpeed={0.15}
       >
@@ -87,7 +87,7 @@ const Home = () => {
 
       <ParallaxSection
         id="skills"
-        imgSrc="3.png"
+        imgSrc="/3.png"
         imgAlt="Abstract architecture"
         imgSpeed={0.25}
       >
@@ -96,21 +96,13 @@ const Home = () => {
 
       <ParallaxSection
         id="projects"
-        imgSrc="cloud.jpg"
+        imgSrc="/cloud.jpg"
         imgAlt="River through a valley"
         imgSpeed={0.1}
       >
         <Projects />
       </ParallaxSection>
 
-      {/* <ParallaxSection
-        id="contact"
-        imgSrc="3.png"
-        imgAlt="River through a valley"
-        imgSpeed={0.1}
-      >
-        <Contact />
-      </ParallaxSection> */}
       <section id="contact">
         <Contact />
       </section>

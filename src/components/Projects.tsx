@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { FaChevronLeft, FaChevronRight, FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -18,28 +19,28 @@ const Projects = () => {
       name: "Project One",
       description:
         "A creative web experience with a focus on user interaction.",
-      image: "https://placehold.co/600x800/1a1a1a/ffffff?text=Project+One",
+      image: "/green.jpg",
       githubUrl: "https://github.com",
       liveUrl: "https://example.com",
     },
     {
       name: "Project Two",
       description: "An e-commerce platform with a minimalist design system.",
-      image: "https://placehold.co/600x800/999999/000000?text=Project+Two",
+      image: "/green.jpg",
       githubUrl: "https://github.com",
       liveUrl: "https://example.com",
     },
     {
       name: "Project Three",
       description: "A portfolio for a photographer using parallax effects.",
-      image: "https://placehold.co/600x800/1a1a1a/ffffff?text=Project+Three",
+      image: "/green.jpg",
       githubUrl: "https://github.com",
       liveUrl: "https://example.com",
     },
     {
       name: "Project Four",
       description: "An interactive 3D product visualizer using Three.js.",
-      image: "https://placehold.co/600x800/999999/000000?text=Project+Four",
+      image: "/green.jpg", // Using local image path
       githubUrl: "https://github.com",
       liveUrl: "https://example.com",
     },
@@ -196,15 +197,11 @@ const Projects = () => {
                 className="project-card w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] mr-6 md:mr-8 flex-shrink-0 scroll-snap-center"
               >
                 <div className="relative w-full h-[60vh] rounded-2xl overflow-hidden mb-6 bg-zinc-900 group">
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.name}
-                    draggable="false"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        "https://placehold.co/600x800/ff0000/ffffff?text=Error";
-                    }}
+                    fill
+                    className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                   />
                 </div>
                 <div className="flex justify-between items-start">
