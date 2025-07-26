@@ -115,14 +115,17 @@ const Home = () => {
         <About />
       </ParallaxSection>
 
-      <ParallaxSection
+      {/* <ParallaxSection
         id="skills"
         imgSrc="/3.png"
         imgAlt="Abstract architecture"
         imgSpeed={0.25}
       >
         <Skills />
-      </ParallaxSection>
+      </ParallaxSection> */}
+      <section id="skills">
+        <Skills />
+      </section>
 
       <ParallaxSection
         id="projects"

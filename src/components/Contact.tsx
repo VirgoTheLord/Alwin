@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const Contact = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLHeadingElement>(null);
   const emailWrapperRef = useRef<HTMLDivElement>(null);
   const emailTextRef = useRef<HTMLDivElement>(null);
   const copiedTextRef = useRef<HTMLSpanElement>(null);
@@ -26,31 +27,30 @@ const Contact = () => {
     e.preventDefault();
     if (emailCopied) return;
 
-    if (emailTextRef.current) {
-      const emailChars = emailTextRef.current.querySelectorAll(".email-char");
-      gsap.to(emailChars, {
-        y: 0,
-        color: "#A3A3A3",
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    }
-
-    const textArea = document.createElement("textarea");
-    textArea.value = emailAddress;
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      document.execCommand("copy");
-      setEmailCopied(true);
-    } catch (err) {
-      console.error("Failed to copy text: ", err);
-    }
-    document.body.removeChild(textArea);
+    // Use the modern Clipboard API for better security and reliability
+    navigator.clipboard.writeText(emailAddress).then(
+      () => {
+        if (emailTextRef.current) {
+          const emailChars =
+            emailTextRef.current.querySelectorAll(".email-char");
+          gsap.to(emailChars, {
+            y: 0,
+            color: "#A3A3A3",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
+        setEmailCopied(true);
+      },
+      (err) => {
+        console.error("Failed to copy text: ", err);
+      }
+    );
   };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Animate "Let's Connect" title
       if (nameRef.current) {
         const split = new SplitText(nameRef.current, { type: "lines,chars" });
         gsap.from(split.chars, {
@@ -67,6 +67,23 @@ const Contact = () => {
         });
       }
 
+      // Animate the subtitle
+      if (subtitleRef.current) {
+        gsap.from(subtitleRef.current, {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+          yPercent: 100,
+          opacity: 0,
+          ease: "power4.out",
+          duration: 1,
+          delay: 0.4, // Delay to start after the main title
+        });
+      }
+
+      // Stagger animation for other contact elements
       gsap.from(".contact-element", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -181,12 +198,21 @@ const Contact = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black -z-10"></div>
 
       <div className="relative z-10 px-4 md:px-20">
-        <h1
-          ref={nameRef}
-          className="text-5xl sm:text-6xl md:text-7xl text-white font-almost mb-6"
-        >
-          Let&apos;s Connect
-        </h1>
+        <div className="md:flex items-baseline justify-center gap-3 overflow-hidden">
+          <h1
+            ref={nameRef}
+            className="text-5xl sm:text-6xl md:text-7xl text-white font-almost mb-6"
+          >
+            Let&apos;s Connect
+          </h1>
+          <h2
+            ref={subtitleRef} // Attach the ref here
+            className="skill-title-part font-raleway text-sm md:text-base font-bold uppercase text-neutral-500 mb-10"
+          >
+            on a professional note, ahem.
+          </h2>
+        </div>
+
         <p className="contact-element text-lg md:text-xl text-neutral-400 font-syne max-w-2xl mx-auto mb-16">
           Have a project in mind or just want to say hello? Feel free to reach
           out. I&apos;m always open to discussing new ideas and opportunities.

@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLHeadingElement>(null); // Ref for the subtitle
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const projectItems = [
@@ -40,7 +41,7 @@ const Projects = () => {
     {
       name: "Project Four",
       description: "An interactive 3D product visualizer using Three.js.",
-      image: "/green.jpg", // Using local image path
+      image: "/green.jpg",
       githubUrl: "https://github.com",
       liveUrl: "https://example.com",
     },
@@ -48,6 +49,7 @@ const Projects = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Animate "Projects" title
       if (nameRef.current) {
         const split = new SplitText(nameRef.current, { type: "lines,chars" });
         gsap.from(split.chars, {
@@ -61,6 +63,22 @@ const Projects = () => {
           ease: "power4.out",
           duration: 1,
           stagger: 0.05,
+        });
+      }
+
+      // Animate "galleria" subtitle
+      if (subtitleRef.current) {
+        gsap.from(subtitleRef.current, {
+          scrollTrigger: {
+            trigger: subtitleRef.current,
+            start: "top 95%",
+            toggleActions: "play none none none",
+          },
+          yPercent: 100,
+          opacity: 0,
+          ease: "power4.out",
+          duration: 1,
+          delay: 0.3, // Delay to start after the main title
         });
       }
     }, containerRef);
@@ -114,7 +132,7 @@ const Projects = () => {
       const card = scrollContainerRef.current.querySelector(".project-card");
       if (card) {
         const cardWidth = card.clientWidth;
-        const gap = parseInt(window.getComputedStyle(card).marginRight);
+        const gap = parseInt(window.getComputedStyle(card).marginRight || "0");
         scrollContainerRef.current.scrollBy({
           left: -(cardWidth + gap),
           behavior: "smooth",
@@ -128,7 +146,7 @@ const Projects = () => {
       const card = scrollContainerRef.current.querySelector(".project-card");
       if (card) {
         const cardWidth = card.clientWidth;
-        const gap = parseInt(window.getComputedStyle(card).marginRight);
+        const gap = parseInt(window.getComputedStyle(card).marginRight || "0");
         scrollContainerRef.current.scrollBy({
           left: cardWidth + gap,
           behavior: "smooth",
@@ -162,24 +180,33 @@ const Projects = () => {
         className="w-full min-h-screen flex flex-col items-start justify-center py-20 md:py-24 overflow-hidden"
       >
         <div className="px-6 md:px-20 text-left w-full flex flex-col md:flex-row md:justify-between md:items-center mb-10 md:mb-16">
-          <h1
-            ref={nameRef}
-            className="text-5xl md:text-7xl text-white font-almost"
-          >
-            Projects
-          </h1>
+          <div className="flex items-baseline gap-3 overflow-hidden">
+            <h1
+              ref={nameRef}
+              className="text-5xl md:text-4xl text-white font-almost"
+            >
+              Projects
+            </h1>
+            <h2
+              ref={subtitleRef} // Attach the ref here
+              className="skill-title-part font-raleway text-sm md:text-base font-bold uppercase text-neutral-500"
+            >
+              galleria
+            </h2>
+          </div>
+
           <div className="flex gap-4 mt-6 md:mt-0">
             <button
               onClick={scrollLeft}
               aria-label="Scroll Left"
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-zinc-800 text-zinc-500 hover:bg-zinc-900 hover:text-white transition-colors flex items-center justify-center"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border bg-neutral-300 border-zinc-800 text-black hover:bg-zinc-900 hover:text-white transition-colors flex items-center justify-center"
             >
               <FaChevronLeft size={24} />
             </button>
             <button
               onClick={scrollRight}
               aria-label="Scroll Right"
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-zinc-800 text-zinc-500 hover:bg-zinc-900 hover:text-white transition-colors flex items-center justify-center"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border bg-neutral-300 border-zinc-800 text-black hover:bg-zinc-900 hover:text-white transition-colors flex items-center justify-center"
             >
               <FaChevronRight size={24} />
             </button>
@@ -206,10 +233,10 @@ const Projects = () => {
                 </div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h2 className="text-2xl md:text-3xl text-neutral-200 font-raleway font-bold mb-2">
+                    <h2 className="text-2xl md:text-3xl text-neutral-100 font-raleway font-bold mb-2">
                       {project.name}
                     </h2>
-                    <p className="text-base md:text-lg text-neutral-500 font-syne">
+                    <p className="text-base md:text-lg text-neutral-300 font-syne">
                       {project.description}
                     </p>
                   </div>
