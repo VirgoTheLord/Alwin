@@ -20,7 +20,6 @@ const Contact = () => {
     navigator.clipboard.writeText(email);
     setEmailCopied(true);
 
-    // Reset the message after a few seconds
     setTimeout(() => {
       setEmailCopied(false);
     }, 2000);
@@ -28,7 +27,6 @@ const Contact = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. "Contact" heading animation
       if (nameRef.current) {
         const split = new SplitText(nameRef.current, { type: "lines,chars" });
         gsap.from(split.chars, {
@@ -45,7 +43,6 @@ const Contact = () => {
         });
       }
 
-      // 2. Animate other elements into view
       gsap.from(".contact-element", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -84,7 +81,7 @@ const Contact = () => {
         onClick={handleEmailClick}
         className="contact-element text-5xl md:text-8xl text-neutral-300 font-raleway font-bold transition-colors duration-300 hover:text-white cursor-pointer"
       >
-        {emailCopied ? "Copied!" : "hello@example.com"}
+        {emailCopied ? "Copied!" : "alwinabyofficial@gmail.com"}
       </a>
     </div>
   );

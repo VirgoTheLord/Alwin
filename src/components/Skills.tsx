@@ -68,7 +68,7 @@ const Skills = () => {
       <div className="px-4 md:px-20 text-center">
         <h1
           ref={nameRef}
-          className="text-5xl md:text-7xl text-white font-almost mb-16 md:mb-24"
+          className="text-5xl md:text-7xl text-white font-almost mb-24 md:mb-24"
         >
           My Skills
         </h1>
