@@ -68,7 +68,7 @@ const Home = () => {
           Alwin.
         </h1>
         <h2 className="hero-subtitle text-2xl sm:text-4xl font-almost text-neutral-300">
-          Creative Developer.
+          Software Developer.
         </h2>
         <p className="hero-button text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne">
           Crafting immersive digital experiences with a blend of creativity and
