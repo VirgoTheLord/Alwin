@@ -62,11 +62,12 @@ const About = () => {
   }, []);
 
   const aboutTextLines = [
-    "I translate complex problems into elegant and pure",
-    "digital solutions, with a strong focus on quality and ",
-    "user experience. I believe in the power of simplicity",
-    "and clarity, and I strive to create products that are not",
-    "only functional but also beautiful and intuitive.",
+    "I translate complex problems into elegant and ",
+    "pure digital solutions, with a strong focus on  ",
+    "quality and user experience. I believe in the ",
+    "power of simplicity and clarity, and I strive to ",
+    "create products that are not only functional ",
+    "but also beautiful and intuitive.",
   ];
 
   return (
@@ -84,7 +85,7 @@ const About = () => {
         <div className="flex flex-col w-full">
           {aboutTextLines.map((line, index) => (
             <div key={index} className="relative mb-2 md:mb-4">
-              <p className="text-5xl sm:text-6xl md:text-7xl text-neutral-500 leading-tight font-xtradex font-medium">
+              <p className="text-5xl sm:text-6xl md:text-7xl text-neutral-500 leading-tight font-mark font-medium">
                 {line}
               </p>
 
@@ -92,7 +93,7 @@ const About = () => {
                 className="fill-line-container absolute top-0 left-0 w-full h-full"
                 style={{ clipPath: "inset(0% 100% 0% 0%)" }}
               >
-                <p className="text-5xl sm:text-6xl md:text-7xl text-white leading-tight font-xtradex font-medium">
+                <p className="text-5xl sm:text-6xl md:text-7xl text-white leading-tight font-mark font-medium">
                   {line}
                 </p>
               </div>

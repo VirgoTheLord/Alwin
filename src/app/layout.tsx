@@ -43,6 +43,11 @@ const almost = localFont({
   variable: "--font-almost",
 });
 
+const mark = localFont({
+  src: "../app/fonts/Afterclap-PK7ng.otf",
+  variable: "--font-mark",
+});
+
 export const metadata: Metadata = {
   title: "Alwin Mathew | Software Developer",
   description:
@@ -54,7 +59,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const fontClassNames = `${playfair.variable} ${raleway.variable} ${syne.variable} ${xtradex.variable} ${almost.variable} ${tanKulture.variable} antialiased`;
+  const fontClassNames = `${playfair.variable} ${raleway.variable} ${syne.variable} ${xtradex.variable} ${almost.variable} ${tanKulture.variable} ${mark.variable} antialiased`;
 
   return (
     <html lang="en">

@@ -16,6 +16,7 @@
   --font-xtradex: var(--font-xtradex);
   --font-almost: var(--font-almost);
   --font-tankulture: var(--font-tankulture);
+  --font-mark: var(--font-mark);
 }
 
 @media (prefers-color-scheme: dark) {
