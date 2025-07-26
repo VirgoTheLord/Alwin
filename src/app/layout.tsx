@@ -34,7 +34,7 @@ const tanKulture = localFont({
 });
 
 const xtradex = localFont({
-  src: "../app/fonts/XtradeX.ttf",
+  src: "../app/fonts/Xtradex.ttf",
   variable: "--font-xtradex",
 });
 
@@ -44,9 +44,9 @@ const almost = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Alwin Mathew | Creative Developer",
+  title: "Alwin Mathew | Software Developer",
   description:
-    "A portfolio showcasing beautiful and functional web experiences.",
+    "A Minimalistic Portfolio showcasing my work as a Software Developer.",
 };
 
 export default function RootLayout({

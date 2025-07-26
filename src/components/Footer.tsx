@@ -1,9 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
 
 const Footer = () => {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  // This effect will pause the animation when the footer is not in view
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    if (!marquee) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            marquee.style.animationPlayState = "running";
+          } else {
+            marquee.style.animationPlayState = "paused";
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% of the element is visible
+    );
+
+    observer.observe(marquee);
+
+    return () => {
+      if (marquee) {
+        observer.unobserve(marquee);
+      }
+    };
+  }, []);
+
+  const MarqueeContent = () => (
+    <div className="flex-shrink-0 flex items-center mx-8">
+      <span className="text-2xl font-tankulture text-neutral-600">
+        ALWIN MATHEW
+      </span>
+      <span className="mx-4 text-2xl text-neutral-700">&bull;</span>
+      <span className="text-2xl font-almost text-neutral-600">
+        Creative Developer
+      </span>
+    </div>
+  );
+
   return (
     <footer className="bg-black text-neutral-400 pb-10 overflow-hidden">
       <style jsx global>{`
@@ -16,29 +57,25 @@ const Footer = () => {
           }
         }
         .animate-scroll {
-          /* The animation is applied to a container that holds two sets of the content */
-          animation: scroll 150s linear infinite;
+          animation: scroll 40s linear infinite;
           display: flex;
           width: fit-content;
+          will-change: transform; /* Hint for browser optimization */
         }
       `}</style>
 
-      <div className="w-full border-t border-b border-neutral-800 py-6 whitespace-nowrap">
+      <div
+        ref={marqueeRef}
+        className="w-full border-t border-b border-neutral-800 py-6 whitespace-nowrap"
+        aria-hidden="true"
+      >
         <div className="animate-scroll flex">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={`item-${i}`}
-              className="flex-shrink-0 flex items-center mx-8"
-            >
-              <span className="text-2xl font-tankulture text-neutral-600">
-                ALWIN MATHEW
-              </span>
-              <span className="mx-4 text-2xl text-neutral-700">&bull;</span>
-              <span className="text-2xl font-almost text-neutral-600">
-                Software Developer
-              </span>
-            </div>
-          ))}
+          {/* Render the content twice for a seamless loop */}
+          <MarqueeContent />
+          <MarqueeContent />
+          <MarqueeContent />
+          <MarqueeContent />
+          <MarqueeContent />
         </div>
       </div>
 
