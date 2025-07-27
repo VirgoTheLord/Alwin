@@ -132,7 +132,10 @@ const Projects = () => {
       const card = scrollContainerRef.current.querySelector(".project-card");
       if (card) {
         const cardWidth = card.clientWidth;
-        const gap = parseInt(window.getComputedStyle(card).marginRight || "0");
+        const gap = parseInt(
+          window.getComputedStyle(scrollContainerRef.current.children[0])
+            .marginRight || "0"
+        );
         scrollContainerRef.current.scrollBy({
           left: -(cardWidth + gap),
           behavior: "smooth",
@@ -146,7 +149,10 @@ const Projects = () => {
       const card = scrollContainerRef.current.querySelector(".project-card");
       if (card) {
         const cardWidth = card.clientWidth;
-        const gap = parseInt(window.getComputedStyle(card).marginRight || "0");
+        const gap = parseInt(
+          window.getComputedStyle(scrollContainerRef.current.children[0])
+            .marginRight || "0"
+        );
         scrollContainerRef.current.scrollBy({
           left: cardWidth + gap,
           behavior: "smooth",
@@ -179,90 +185,94 @@ const Projects = () => {
         ref={containerRef}
         className="w-full min-h-screen flex flex-col items-start justify-center py-20 md:py-24 overflow-hidden"
       >
-        <div className="px-6 md:px-20 text-left w-full flex flex-col md:flex-row md:justify-between md:items-center mb-10 md:mb-16">
+        <div className="px-6 md:px-20 text-left w-full mb-10 md:mb-16">
           <div className="flex items-baseline gap-3 overflow-hidden">
             <h1
               ref={nameRef}
-              className="text-5xl md:text-4xl text-white font-almost"
+              className="text-4xl md:text-4xl text-white font-almost"
             >
               Projects
             </h1>
             <h2
-              ref={subtitleRef} // Attach the ref here
+              ref={subtitleRef}
               className="skill-title-part font-raleway text-sm md:text-base font-bold uppercase text-neutral-500"
             >
               galleria
             </h2>
           </div>
+        </div>
 
-          <div className="flex gap-4 mt-6 md:mt-0">
+        {/* --- Carousel and Controls Wrapper --- */}
+        <div className="relative w-full">
+          {/* --- Scrollable Project Cards --- */}
+          <div
+            ref={scrollContainerRef}
+            className="w-full overflow-x-auto pb-10 scroll-snap-x-mandatory hide-scrollbar draggable-scroll"
+          >
+            <div className="flex w-max px-6 md:px-20">
+              {projectItems.map((project, index) => (
+                <div
+                  key={index}
+                  className="project-card w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] mr-6 md:mr-8 flex-shrink-0 scroll-snap-center"
+                >
+                  <div className="relative w-full h-[60vh] rounded-2xl overflow-hidden mb-6 bg-zinc-900 group">
+                    <Image
+                      src={project.image}
+                      alt={project.name}
+                      fill
+                      className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h2 className="text-2xl md:text-3xl text-neutral-100 font-raleway font-bold mb-2">
+                        {project.name}
+                      </h2>
+                      <p className="text-base md:text-lg text-neutral-300 font-syne">
+                        {project.description}
+                      </p>
+                    </div>
+                    <div className="flex gap-3 mt-1 flex-shrink-0">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`GitHub repository for ${project.name}`}
+                        className="text-neutral-500 hover:text-white transition-colors"
+                      >
+                        <FaGithub size={24} />
+                      </a>
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Live site for ${project.name}`}
+                        className="text-neutral-500 hover:text-white transition-colors"
+                      >
+                        <FiExternalLink size={24} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center pointer-events-none px-4 md:px-10 -mt-15">
             <button
               onClick={scrollLeft}
               aria-label="Scroll Left"
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border bg-neutral-300 border-zinc-800 text-black hover:bg-zinc-900 hover:text-white transition-colors flex items-center justify-center"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 text-white hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-auto shadow-lg"
             >
-              <FaChevronLeft size={24} />
+              <FaChevronLeft size={20} />
             </button>
             <button
               onClick={scrollRight}
               aria-label="Scroll Right"
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border bg-neutral-300 border-zinc-800 text-black hover:bg-zinc-900 hover:text-white transition-colors flex items-center justify-center"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 text-white hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-auto shadow-lg"
             >
-              <FaChevronRight size={24} />
+              <FaChevronRight size={20} />
             </button>
-          </div>
-        </div>
-
-        <div
-          ref={scrollContainerRef}
-          className="w-full overflow-x-auto pb-10 scroll-snap-x-mandatory hide-scrollbar draggable-scroll"
-        >
-          <div className="flex w-max px-6 md:px-20">
-            {projectItems.map((project, index) => (
-              <div
-                key={index}
-                className="project-card w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] mr-6 md:mr-8 flex-shrink-0 scroll-snap-center"
-              >
-                <div className="relative w-full h-[60vh] rounded-2xl overflow-hidden mb-6 bg-zinc-900 group">
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    fill
-                    className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h2 className="text-2xl md:text-3xl text-neutral-100 font-raleway font-bold mb-2">
-                      {project.name}
-                    </h2>
-                    <p className="text-base md:text-lg text-neutral-300 font-syne">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex gap-3 mt-1 flex-shrink-0">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`GitHub repository for ${project.name}`}
-                      className="text-neutral-500 hover:text-white transition-colors"
-                    >
-                      <FaGithub size={24} />
-                    </a>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Live site for ${project.name}`}
-                      className="text-neutral-500 hover:text-white transition-colors"
-                    >
-                      <FiExternalLink size={24} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
