@@ -6,7 +6,6 @@ import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
 const Footer = () => {
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  // This effect will pause the animation when the footer is not in view
   useEffect(() => {
     const marquee = marqueeRef.current;
     if (!marquee) return;
@@ -21,7 +20,7 @@ const Footer = () => {
           }
         });
       },
-      { threshold: 0.1 } // Trigger when 10% of the element is visible
+      { threshold: 0.1 }
     );
 
     observer.observe(marquee);

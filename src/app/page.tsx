@@ -1,67 +1,57 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, Suspense } from "react";
 import gsap from "gsap";
-import { ScrollTrigger, SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import { useLenis } from "lenis/react";
-import ParallaxSection from "../components/ParallaxSection";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Contact from "@/components/Contact";
-import Projects from "@/components/Projects";
+
+const About = React.lazy(() => import("@/components/About"));
+const Skills = React.lazy(() => import("@/components/Skills"));
+const Contact = React.lazy(() => import("@/components/Contact"));
+const Projects = React.lazy(() => import("@/components/Projects"));
+const ParallaxSection = React.lazy(
+  () => import("../components/ParallaxSection")
+);
+
+const SectionLoader = () => (
+  <div className="h-screen w-full flex justify-center items-center bg-zinc-900">
+    <p className="text-white">Loading...</p>
+  </div>
+);
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Home = () => {
   const mainContainerRef = useRef(null);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
-    if (lenis) {
-      lenis.on("scroll", ScrollTrigger.update);
-      const unsubscribe = gsap.ticker.add((time: number) => {
-        lenis.raf(time * 1000);
-      });
-      gsap.ticker.lagSmoothing(0);
-      return () => {
-        unsubscribe();
-        lenis.off("scroll", ScrollTrigger.update);
-      };
-    }
+    if (!lenis) return;
+
+    lenis.on("scroll", ScrollTrigger.update);
+    const unsubscribe = gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      unsubscribe();
+      lenis.off("scroll", ScrollTrigger.update);
+    };
   }, [lenis]);
 
   useEffect(() => {
-    const loadFonts = async () => {
-      try {
-        if (document.fonts && document.fonts.ready) {
-          await document.fonts.ready;
-        }
-
-        await new Promise((resolve) => requestAnimationFrame(resolve));
-
-        await new Promise((resolve) => setTimeout(resolve, 50));
-
-        setFontsLoaded(true);
-      } catch (error) {
-        setTimeout(() => setFontsLoaded(true), 200);
-      }
-    };
-
-    loadFonts();
-  }, []);
-
-  useEffect(() => {
-    if (!fontsLoaded) return;
-
     const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.3 });
+
       const split = new SplitText(".hero-title", {
         type: "chars",
         charsClass: "char",
       });
 
-      const tl = gsap.timeline({ delay: 0.2 });
-
+      // FIX: Animate the container from invisible to visible first.
+      // Then animate the characters inside it.
       tl.from(".hero-title", { autoAlpha: 0, duration: 0.01 })
         .from(
           split.chars,
@@ -72,10 +62,10 @@ const Home = () => {
             ease: "power4.out",
             stagger: 0.05,
           },
-          "<"
+          "<" // Start at the same time as the parent animation
         )
         .from(
-          ".hero-subtitle, .hero-button",
+          ".hero-subtitle, .hero-description",
           {
             y: 30,
             autoAlpha: 0,
@@ -88,7 +78,7 @@ const Home = () => {
     }, mainContainerRef);
 
     return () => ctx.revert();
-  }, [fontsLoaded]);
+  }, []);
 
   return (
     <main ref={mainContainerRef}>
@@ -100,45 +90,45 @@ const Home = () => {
         <h2 className="hero-subtitle text-2xl sm:text-4xl font-almost text-neutral-300 invisible">
           Software Developer.
         </h2>
-        <p className="hero-button text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne invisible">
+        <p className="hero-description text-xs sm:text-lg text-neutral-400 mt-3 max-w-2xl text-center font-syne invisible">
           Crafting immersive digital experiences with a blend of creativity and
           technology.
         </p>
       </section>
 
-      <ParallaxSection
-        id="about"
-        imgSrc="/cloud.jpg"
-        imgAlt="Mountain landscape"
-        imgSpeed={0.15}
-      >
-        <About />
-      </ParallaxSection>
+      <Suspense fallback={<SectionLoader />}>
+        <ParallaxSection
+          id="about"
+          imgSrc="/cloud.jpg"
+          imgAlt="Mountain landscape"
+          imgSpeed={0.15}
+        >
+          <About />
+        </ParallaxSection>
+      </Suspense>
 
-      {/* <ParallaxSection
-        id="skills"
-        imgSrc="/3.png"
-        imgAlt="Abstract architecture"
-        imgSpeed={0.25}
-      >
-        <Skills />
-      </ParallaxSection> */}
-      <section id="skills">
-        <Skills />
-      </section>
+      <Suspense fallback={<SectionLoader />}>
+        <section id="skills">
+          <Skills />
+        </section>
+      </Suspense>
 
-      <ParallaxSection
-        id="projects"
-        imgSrc="/cloud.jpg"
-        imgAlt="River through a valley"
-        imgSpeed={0.1}
-      >
-        <Projects />
-      </ParallaxSection>
+      <Suspense fallback={<SectionLoader />}>
+        <ParallaxSection
+          id="projects"
+          imgSrc="/cloud.jpg"
+          imgAlt="River through a valley"
+          imgSpeed={0.1}
+        >
+          <Projects />
+        </ParallaxSection>
+      </Suspense>
 
-      <section id="contact">
-        <Contact />
-      </section>
+      <Suspense fallback={<SectionLoader />}>
+        <section id="contact">
+          <Contact />
+        </section>
+      </Suspense>
     </main>
   );
 };

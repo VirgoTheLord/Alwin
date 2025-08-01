@@ -49,7 +49,6 @@ const Projects = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate "Projects" title
       if (nameRef.current) {
         const split = new SplitText(nameRef.current, { type: "lines,chars" });
         gsap.from(split.chars, {
@@ -66,7 +65,6 @@ const Projects = () => {
         });
       }
 
-      // Animate "galleria" subtitle
       if (subtitleRef.current) {
         gsap.from(subtitleRef.current, {
           scrollTrigger: {
@@ -78,7 +76,7 @@ const Projects = () => {
           opacity: 0,
           ease: "power4.out",
           duration: 1,
-          delay: 0.3, // Delay to start after the main title
+          delay: 0.3,
         });
       }
     }, containerRef);
@@ -258,7 +256,7 @@ const Projects = () => {
             </div>
           </div>
 
-          <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center pointer-events-none px-4 md:px-10 -mt-15">
+          <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center pointer-events-none px-4 md:px-10 -mt-15  ">
             <button
               onClick={scrollLeft}
               aria-label="Scroll Left"

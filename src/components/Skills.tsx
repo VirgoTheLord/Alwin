@@ -99,7 +99,7 @@ const Skills = () => {
                   {skill.name}
                 </span>
                 <span className="text-lg md:text-xl text-neutral-500 font-syne transition-colors duration-300 ease-in-out group-hover:text-neutral-700 [.group.is-active_&]:text-neutral-700">
-                  Expert
+                  Beginner
                 </span>
               </div>
             </div>
