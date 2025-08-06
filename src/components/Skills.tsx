@@ -12,14 +12,15 @@ const Skills = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const skillItems = [
-    { name: "React" },
-    { name: "TypeScript" },
-    { name: "Next.js" },
-    { name: "GSAP" },
-    { name: "MERN" },
-    { name: "WebSockets" },
-    { name: "JavaScript" },
-    { name: "Tailwind CSS" },
+    { name: "React", level: "Expert" },
+    { name: "TypeScript", level: "Intermediate" },
+    { name: "Next.js", level: "Intermediate" },
+    { name: "GSAP", level: "Intermediate" },
+    { name: "MERN", level: "Expert" },
+    { name: "WebSockets", level: "Intermediate" },
+    { name: "JavaScript", level: "Intermediate" },
+    { name: "Tailwind CSS", level: "Expert" },
+    { name: "Python", level: "Intermediate" },
   ];
 
   const handleSkillClick = (index: number) => {
@@ -99,7 +100,7 @@ const Skills = () => {
                   {skill.name}
                 </span>
                 <span className="text-lg md:text-xl text-neutral-500 font-syne transition-colors duration-300 ease-in-out group-hover:text-neutral-700 [.group.is-active_&]:text-neutral-700">
-                  Beginner
+                  {skill.level}
                 </span>
               </div>
             </div>

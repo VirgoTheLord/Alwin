@@ -12,35 +12,34 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLHeadingElement>(null); // Ref for the subtitle
+  const subtitleRef = useRef<HTMLHeadingElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const projectItems = [
     {
-      name: "Project One",
-      description:
-        "A creative web experience with a focus on user interaction.",
-      image: "/green.jpg",
-      githubUrl: "https://github.com",
+      name: "Mentimeter Clone",
+      description: "A creative quiz experience using native WebSockets.",
+      image: "/Mentimeter.png",
+      githubUrl: "https://github.com/VirgoTheLord/Menti",
       liveUrl: "https://example.com",
     },
     {
-      name: "Project Two",
+      name: "RogueShore",
       description: "An e-commerce platform with a minimalist design system.",
-      image: "/green.jpg",
-      githubUrl: "https://github.com",
-      liveUrl: "https://example.com",
+      image: "/RogueShore.png",
+      githubUrl: "https://github.com/VirgoTheLord/RogueShore",
+      liveUrl: "https://rogueshore.vercel.app/",
     },
     {
-      name: "Project Three",
-      description: "A portfolio for a photographer using parallax effects.",
-      image: "/green.jpg",
-      githubUrl: "https://github.com",
-      liveUrl: "https://example.com",
+      name: "Freemato",
+      description: "An e-commerce platform with a minimalist design system.",
+      image: "/Freemato-final.png",
+      githubUrl: "https://github.com/VirgoTheLord/FreeMato",
+      liveUrl: "https://freemato.vercel.app/",
     },
     {
-      name: "Project Four",
-      description: "An interactive 3D product visualizer using Three.js.",
+      name: "Coming Soon",
+      description: "Will be updated in future...",
       image: "/green.jpg",
       githubUrl: "https://github.com",
       liveUrl: "https://example.com",
@@ -200,9 +199,7 @@ const Projects = () => {
           </div>
         </div>
 
-        {/* --- Carousel and Controls Wrapper --- */}
         <div className="relative w-full">
-          {/* --- Scrollable Project Cards --- */}
           <div
             ref={scrollContainerRef}
             className="w-full overflow-x-auto pb-10 scroll-snap-x-mandatory hide-scrollbar draggable-scroll"
@@ -220,6 +217,7 @@ const Projects = () => {
                       fill
                       className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-black opacity-10"></div>
                   </div>
                   <div className="flex justify-between items-start">
                     <div>
