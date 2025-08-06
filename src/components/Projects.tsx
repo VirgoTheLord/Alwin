@@ -21,7 +21,7 @@ const Projects = () => {
       description: "A creative quiz experience using native WebSockets.",
       image: "/Mentimeter.png",
       githubUrl: "https://github.com/VirgoTheLord/Menti",
-      liveUrl: "https://example.com",
+      liveUrl: "https://mentimeter-rho.vercel.app/",
     },
     {
       name: "RogueShore",
