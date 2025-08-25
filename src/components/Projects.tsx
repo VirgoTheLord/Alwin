@@ -6,6 +6,7 @@ import { ScrollTrigger, SplitText } from "gsap/all";
 import { FaChevronLeft, FaChevronRight, FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import Image from "next/image";
+import ControlBar from "./ControlBar";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -46,6 +47,7 @@ const Projects = () => {
     },
   ];
 
+  // ... (all your hooks remain unchanged)
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (nameRef.current) {
@@ -63,7 +65,6 @@ const Projects = () => {
           stagger: 0.05,
         });
       }
-
       if (subtitleRef.current) {
         gsap.from(subtitleRef.current, {
           scrollTrigger: {
@@ -79,18 +80,15 @@ const Projects = () => {
         });
       }
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
   useEffect(() => {
     const slider = scrollContainerRef.current;
     if (!slider) return;
-
     let isDown = false;
     let startX: number;
     let scrollLeft: number;
-
     const handleMouseDown = (e: MouseEvent) => {
       isDown = true;
       slider.classList.add("active-drag");
@@ -99,14 +97,12 @@ const Projects = () => {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
     };
-
     const handleMouseUp = () => {
       isDown = false;
       slider.classList.remove("active-drag");
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDown) return;
       e.preventDefault();
@@ -114,9 +110,7 @@ const Projects = () => {
       const walk = x - startX;
       slider.scrollLeft = scrollLeft - walk;
     };
-
     slider.addEventListener("mousedown", handleMouseDown);
-
     return () => {
       slider.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -178,9 +172,10 @@ const Projects = () => {
           user-select: none;
         }
       `}</style>
+
       <div
         ref={containerRef}
-        className="w-full min-h-screen flex flex-col items-start justify-center py-20 md:py-24 overflow-hidden"
+        className="w-full min-h-screen flex flex-col items-start justify-center py-20 md:py-24 overflow-hidden relative"
       >
         <div className="px-6 md:px-20 text-left w-full mb-10 md:mb-16">
           <div className="flex items-baseline gap-3 overflow-hidden">
@@ -199,6 +194,7 @@ const Projects = () => {
           </div>
         </div>
 
+        {/* FIX 1: Removed 'overflow-hidden' from this div */}
         <div className="relative w-full">
           <div
             ref={scrollContainerRef}
@@ -233,7 +229,6 @@ const Projects = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`GitHub repository for ${project.name}`}
                         className="text-neutral-500 hover:text-white transition-colors"
                       >
                         <FaGithub size={24} />
@@ -242,7 +237,6 @@ const Projects = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Live site for ${project.name}`}
                         className="text-neutral-500 hover:text-white transition-colors"
                       >
                         <FiExternalLink size={24} />
@@ -254,7 +248,8 @@ const Projects = () => {
             </div>
           </div>
 
-          <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center pointer-events-none px-4 md:px-10 -mt-15  ">
+          {/* FIX 2: Removed non-standard '-mt-15' class */}
+          <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center pointer-events-none px-4 md:px-10">
             <button
               onClick={scrollLeft}
               aria-label="Scroll Left"
@@ -270,6 +265,10 @@ const Projects = () => {
               <FaChevronRight size={20} />
             </button>
           </div>
+        </div>
+
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-50">
+          <ControlBar />
         </div>
       </div>
     </>

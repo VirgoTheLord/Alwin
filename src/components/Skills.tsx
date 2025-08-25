@@ -92,14 +92,18 @@ const Skills = () => {
                 activeIndex === index ? "is-active" : ""
               }`}
             >
-              <div className="absolute top-0 left-0 w-full h-1/2 bg-white transform scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100 [.group.is-active_&]:scale-y-100"></div>
-              <div className="absolute bottom-0 left-0 w-full h-1/2 bg-white transform scale-y-0 origin-top transition-transform duration-500 ease-in-out group-hover:scale-y-100 [.group.is-active_&]:scale-y-100"></div>
+              {/* Top overlay */}
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-white transform scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100 group-[.is-active]:scale-y-100"></div>
 
+              {/* Bottom overlay */}
+              <div className="absolute bottom-0 left-0 w-full h-1/2 bg-white transform scale-y-0 origin-top transition-transform duration-500 ease-in-out group-hover:scale-y-100 group-[.is-active]:scale-y-100"></div>
+
+              {/* Content */}
               <div className="relative z-10 flex justify-between items-center w-full">
-                <span className="text-4xl sm:text-5xl text-neutral-400 font-raleway font-bold transition-colors duration-300 ease-in-out group-hover:text-black [.group.is-active_&]:text-black">
+                <span className="text-4xl sm:text-5xl text-neutral-400 font-raleway font-bold transition-colors duration-300 ease-in-out group-hover:text-black group-[.is-active]:text-black">
                   {skill.name}
                 </span>
-                <span className="text-lg md:text-xl text-neutral-500 font-syne transition-colors duration-300 ease-in-out group-hover:text-neutral-700 [.group.is-active_&]:text-neutral-700">
+                <span className="text-lg md:text-xl text-neutral-500 font-syne transition-colors duration-300 ease-in-out group-hover:text-neutral-700 group-[.is-active]:text-neutral-700">
                   {skill.level}
                 </span>
               </div>
